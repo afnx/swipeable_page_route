@@ -199,6 +199,7 @@ class _AnimatedAppBar extends AnimatedWidget {
       shape: ShapeBorder.lerp(parent.appBar.shape, child.appBar.shape, t),
       brightness: state.brightness,
       backgroundColor: state.backgroundColor,
+      leadingWidth: state.parent.appBar.leadingWidth,
       // iconTheme & actionsIconTheme are applied in AnimatedLeading &
       // AnimatedActions directly to differentiate between parent & child.
       // Value is the same for parent and child, so it doesn't matter which one

@@ -34,6 +34,7 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleSpacing = NavigationToolbar.kMiddleSpacing,
     this.toolbarOpacity = 1.0,
     this.bottomOpacity = 1.0,
+    this.leadingWidth,
   })  : assert(heroTag != null),
         assert(automaticallyImplyLeading != null),
         assert(elevation == null || elevation >= 0.0),
@@ -101,6 +102,9 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// See [AppBar.bottomOpacity]
   final double bottomOpacity;
+  
+  /// See [AppBar.leadingWidth]
+  final double leadingWidth;
 
   @override
   final Size preferredSize;
@@ -130,6 +134,7 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
         titleSpacing: titleSpacing,
         toolbarOpacity: toolbarOpacity,
         bottomOpacity: bottomOpacity,
+        leadingWidth: leadingWidth,
       ),
     );
   }

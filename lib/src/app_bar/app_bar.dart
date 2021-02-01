@@ -187,24 +187,27 @@ class _AnimatedAppBar extends AnimatedWidget {
   Widget build(BuildContext context) {
     final state = MorphingState(parent: parent, child: child, t: t);
 
-    return AppBar(
-      leading: AnimatedLeading(state),
-      // We manually determine the leadings to be able to animate between them.
-      automaticallyImplyLeading: false,
-      title: AnimatedTitle(state),
-      actions: [AnimatedActions(state)],
-      bottom: AnimatedBottom(state),
-      elevation:
-          lerpDouble(_resolveElevation(parent), _resolveElevation(child), t),
-      shape: ShapeBorder.lerp(parent.appBar.shape, child.appBar.shape, t),
-      brightness: state.brightness,
-      backgroundColor: state.backgroundColor,
-      leadingWidth: state.parent.appBar.leadingWidth,
-      // iconTheme & actionsIconTheme are applied in AnimatedLeading &
-      // AnimatedActions directly to differentiate between parent & child.
-      // Value is the same for parent and child, so it doesn't matter which one
-      // we use.
-      primary: parent.appBar.primary,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        leading: AnimatedLeading(state),
+        // We manually determine the leadings to be able to animate between them.
+        automaticallyImplyLeading: false,
+        title: AnimatedTitle(state),
+        actions: [AnimatedActions(state)],
+        bottom: AnimatedBottom(state),
+        elevation:
+            lerpDouble(_resolveElevation(parent), _resolveElevation(child), t),
+        shape: ShapeBorder.lerp(parent.appBar.shape, child.appBar.shape, t),
+        brightness: state.brightness,
+        backgroundColor: state.backgroundColor,
+        leadingWidth: state.parent.appBar.leadingWidth,
+        // iconTheme & actionsIconTheme are applied in AnimatedLeading &
+        // AnimatedActions directly to differentiate between parent & child.
+        // Value is the same for parent and child, so it doesn't matter which one
+        // we use.
+        primary: parent.appBar.primary,
+      ),
     );
   }
 

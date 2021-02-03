@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import 'actions.dart';
 import 'bottom.dart';
@@ -111,33 +112,29 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Hero(
-        tag: heroTag,
-        flightShuttleBuilder: _flightShuttleBuilder,
-        transitionOnUserGestures: true,
-        child: AppBar(
-          leading: leading,
-          automaticallyImplyLeading: automaticallyImplyLeading,
-          title: title,
-          actions: actions,
-          flexibleSpace: flexibleSpace,
-          bottom: bottom,
-          elevation: elevation,
-          shape: shape,
-          backgroundColor: backgroundColor,
-          brightness: brightness,
-          iconTheme: iconTheme,
-          actionsIconTheme: actionsIconTheme,
-          textTheme: textTheme,
-          primary: primary,
-          centerTitle: centerTitle,
-          titleSpacing: titleSpacing,
-          toolbarOpacity: toolbarOpacity,
-          bottomOpacity: bottomOpacity,
-          leadingWidth: leadingWidth,
-        ),
+    return Hero(
+      tag: heroTag,
+      flightShuttleBuilder: _flightShuttleBuilder,
+      transitionOnUserGestures: true,
+      child: AppBar(
+        leading: leading,
+        automaticallyImplyLeading: automaticallyImplyLeading,
+        title: title,
+        actions: actions,
+        flexibleSpace: flexibleSpace,
+        bottom: bottom,
+        elevation: elevation,
+        shape: shape,
+        backgroundColor: backgroundColor,
+        brightness: brightness,
+        iconTheme: iconTheme,
+        actionsIconTheme: actionsIconTheme,
+        textTheme: textTheme,
+        primary: primary,
+        centerTitle: centerTitle,
+        titleSpacing: titleSpacing,
+        toolbarOpacity: toolbarOpacity,
+        bottomOpacity: bottomOpacity,
       ),
     );
   }
@@ -192,8 +189,10 @@ class _AnimatedAppBar extends AnimatedWidget {
 
     return IgnorePointer(
       ignoring: true,
-      child: Material(
-        color: Colors.transparent,
+      child: Padding(
+        padding: EdgeInsets.only(
+          right: ResponsiveWrapper.of(context).scaledWidth - ResponsiveWrapper.of(context).screenWidth,
+        ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -203,11 +202,12 @@ class _AnimatedAppBar extends AnimatedWidget {
             title: AnimatedTitle(state),
             actions: [AnimatedActions(state)],
             bottom: AnimatedBottom(state),
-            elevation: lerpDouble(_resolveElevation(parent), _resolveElevation(child), t),
+            elevation:
+                lerpDouble(_resolveElevation(parent), _resolveElevation(child), t),
             shape: ShapeBorder.lerp(parent.appBar.shape, child.appBar.shape, t),
             brightness: state.brightness,
             backgroundColor: state.backgroundColor,
-            leadingWidth: state.parent.appBar.leadingWidth,
+            leadingWidth: parent.appBar.leadingWidth,
             // iconTheme & actionsIconTheme are applied in AnimatedLeading &
             // AnimatedActions directly to differentiate between parent & child.
             // Value is the same for parent and child, so it doesn't matter which one

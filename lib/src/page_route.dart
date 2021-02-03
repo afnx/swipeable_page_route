@@ -53,7 +53,7 @@ class SwipeablePageRoute<T> extends PageRoute<T> {
   Duration get transitionDuration => Duration(milliseconds: 400);
 
   @override
-  Color get barrierColor => null;
+  Color get barrierColor => Colors.black12;
 
   @override
   String get barrierLabel => null;

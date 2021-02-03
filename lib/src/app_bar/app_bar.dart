@@ -135,6 +135,7 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
         titleSpacing: titleSpacing,
         toolbarOpacity: toolbarOpacity,
         bottomOpacity: bottomOpacity,
+        leadingWidth:leadingWidth,
       ),
     );
   }

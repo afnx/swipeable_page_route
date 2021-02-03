@@ -200,7 +200,7 @@ class FancyPageTransition extends StatelessWidget {
       child: SlideTransition(
         position: _primaryPositionAnimation,
         textDirection: textDirection,
-        child: Material(elevation: 30.0, child: child),
+        child: Material(elevation: 80.0, child: child),
       ),
     );
   }

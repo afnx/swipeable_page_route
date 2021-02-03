@@ -36,6 +36,7 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.toolbarOpacity = 1.0,
     this.bottomOpacity = 1.0,
     this.leadingWidth,
+    this.heroAppBarColor,
   })  : assert(heroTag != null),
         assert(automaticallyImplyLeading != null),
         assert(elevation == null || elevation >= 0.0),
@@ -106,6 +107,9 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
   
   /// See [AppBar.leadingWidth]
   final double leadingWidth;
+  
+  /// App bar color in hero flight
+  final Color heroAppBarColor;
 
   @override
   final Size preferredSize;
@@ -161,6 +165,7 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
       parent: direction == HeroFlightDirection.push ? fromState : toState,
       child: direction == HeroFlightDirection.push ? toState : fromState,
       animation: animation,
+      heroAppBarColor: heroAppBarColor,
     );
   }
 }
@@ -170,6 +175,7 @@ class _AnimatedAppBar extends AnimatedWidget {
     @required this.parent,
     @required this.child,
     @required this.animation,
+    @required this.heroAppBarColor,
   })  : assert(parent != null),
         assert(child != null),
         assert(
@@ -180,6 +186,7 @@ class _AnimatedAppBar extends AnimatedWidget {
 
   final EndState parent;
   final EndState child;
+  final Color heroAppBarColor;
 
   final Animation<double> animation;
   double get t => animation.value;
@@ -207,7 +214,7 @@ class _AnimatedAppBar extends AnimatedWidget {
                 lerpDouble(_resolveElevation(parent), _resolveElevation(child), t),
             shape: ShapeBorder.lerp(parent.appBar.shape, child.appBar.shape, t),
             brightness: state.brightness,
-            backgroundColor: state.backgroundColor,
+            backgroundColor: heroAppBarColor,
             leadingWidth: parent.appBar.leadingWidth,
             // iconTheme & actionsIconTheme are applied in AnimatedLeading &
             // AnimatedActions directly to differentiate between parent & child.

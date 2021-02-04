@@ -36,6 +36,7 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.toolbarOpacity = 1.0,
     this.bottomOpacity = 1.0,
     this.leadingWidth,
+    this.toolbarHeight,
     this.heroAppBarColor,
   })  : assert(heroTag != null),
         assert(automaticallyImplyLeading != null),
@@ -108,6 +109,9 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// See [AppBar.leadingWidth]
   final double leadingWidth;
   
+  /// See [AppBar.toolbarHeight]
+  final double toolbarHeight;
+  
   /// App bar color in hero flight
   final Color heroAppBarColor;
 
@@ -139,7 +143,8 @@ class MorphingAppBar extends StatelessWidget implements PreferredSizeWidget {
         titleSpacing: titleSpacing,
         toolbarOpacity: toolbarOpacity,
         bottomOpacity: bottomOpacity,
-        leadingWidth:leadingWidth,
+        leadingWidth: leadingWidth,
+        toolbarHeight: toolbarHeight,
       ),
     );
   }
@@ -216,6 +221,7 @@ class _AnimatedAppBar extends AnimatedWidget {
             brightness: state.brightness,
             backgroundColor: heroAppBarColor,
             leadingWidth: parent.appBar.leadingWidth,
+            toolbarHeight: parent.appBar.toolbarHeight,
             // iconTheme & actionsIconTheme are applied in AnimatedLeading &
             // AnimatedActions directly to differentiate between parent & child.
             // Value is the same for parent and child, so it doesn't matter which one
